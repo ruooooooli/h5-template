@@ -13,7 +13,7 @@ switch ($action) {
         Common::setSession(SESS_TARGET_URL, $currentUrl);
 
         // 跳转去授权
-        $app->wechat->oauth->redirect();
+        return $app->wechat->oauth->redirect()->send();
         break;
     case 'callback':
         // 处理回调
