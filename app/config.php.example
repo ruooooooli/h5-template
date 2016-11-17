@@ -5,7 +5,7 @@
  */
 define('APP_DEBUG', true); // 开启错误显示
 define('ENABLE_SESSION', true); // 启用 session
-define('APP_URL', 'http://www.example.com/'); // 网站的根域名
+define('APP_URL', ''); // 网站的根域名
 define('INDEX_URL', APP_URL.'index.php'); // index.php
 define('AUTHORIZE_URL', APP_URL.'authorize.php'); // authorize.php 授权页
 define('AUTHORIZE_CALLBACK', AUTHORIZE_URL.'?action=callback'); // 授权回调地址
@@ -36,7 +36,7 @@ define('DB_USERNAME', '');
 define('DB_PASSWORD', '');
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATION', 'utf8_unicode_ci');
-define('DB_PREFIX', 'utf8');
+define('DB_PREFIX', '');
 
 /**
  * 其他配置

@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Database\Capsule\Manager as DB;
+
 /**
  * 项目公用函数类
  */
@@ -59,8 +61,41 @@ class Common
         return self::setSession(SESS_AUTHORIZE_KEY, $user);
     }
 
-    public static function generateUrl($path)
+    /**
+     * 生成 url
+     */
+    public static function generateUrl($path = '')
     {
         return APP_URL.trim($path, '/');
+    }
+
+    /**
+     * 保存微信的用户信息到数据库
+     */
+    public static function saveWechatUser($user)
+    {
+        $query = DB::table('wechats')->where('openid', '=', $user['openid']);
+
+        if ($query->exists()) {
+            $query->update(array(
+                'nickname'      => $user['nickname'],
+                'avatar'        => $user['headimgurl'],
+                'updated_at'    => date('Y-m-d H:i:s'),
+            ));
+        } else {
+            $wechats = DB::table('wechats')->insert(
+                array(
+                    'openid'        => $user['openid'],
+                    'nickname'      => $user['nickname'],
+                    'gender'        => ($user['sex'] == 1) ? 'M' : 'F',
+                    'country'       => $user['country'],
+                    'province'      => $user['province'],
+                    'city'          => $user['city'],
+                    'avatar'        => $user['headimgurl'],
+                    'created_at'    => date('Y-m-d H:i:s'),
+                    'updated_at'    => date('Y-m-d H:i:s'),
+                )
+            );
+        }
     }
 }

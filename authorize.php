@@ -8,19 +8,13 @@ $action = $app->get('action', '');
  */
 switch ($action) {
     case '':
-        // 获取当前页地址
-        $currentUrl = Common::generateUrl($_SERVER['REQUEST_URI']);
-        Common::setSession(SESS_TARGET_URL, $currentUrl);
-
-        // 跳转去授权
         return $app->wechat->oauth->redirect()->send();
         break;
     case 'callback':
-        // 处理回调
         $user = $app->wechat->oauth->user();
-
-        // 持久化用户信息
-        var_dump($user);
+        Common::setAuthUser($user->getOriginal());
+        Common::saveWechatUser($user->getOriginal());
+        Util::redirect('index.php');
         break;
     default:
         exit('Failed request!');

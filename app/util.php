@@ -99,13 +99,13 @@ class Util
     /**
      * 重定向
      */
-    public static function redirect($path)
+    public static function redirect($path = '')
     {
         if (empty($path)) {
             return false;
         }
 
-        header("Location : {$path}");
+        header("Location: {$path}");
         exit;
     }
 

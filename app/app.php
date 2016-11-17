@@ -109,6 +109,7 @@ class Application
             'prefix'    => DB_PREFIX,
         ));
 
+        $database->setAsGlobal();
         $this->database = $database;
     }
 
