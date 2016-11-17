@@ -6,11 +6,41 @@
 class Common
 {
     /**
+     * 设置 session
+     */
+    public static function setSession($key, $value = '')
+    {
+        if (empty($key) || empty($value)) {
+            return false;
+        }
+
+        $_SESSION[$key] = serialize($value);
+
+        return self::hasSession($key);
+    }
+
+    /**
+     * 获取 session
+     */
+    public static function getSession($key)
+    {
+        return self::hasSession($key) ? unserialize($_SESSION[$key]) : null;
+    }
+
+    /**
+     * 是否有 session
+     */
+    public static function hasSession($key)
+    {
+        return isset($_SESSION[$key]);
+    }
+
+    /**
      * 判断用户是否认证
      */
     public static function isAuth()
     {
-        return isset($_SESSION[AUTHORIZE_KEY]);
+        return self::hasSession(SESS_AUTHORIZE_KEY);
     }
 
     /**
@@ -18,7 +48,7 @@ class Common
      */
     public static function getAuthUser()
     {
-        return self::isAuth() ? unserialize($_SESSION[AUTHORIZE_KEY]) : null;
+        return self::getSession(SESS_AUTHORIZE_KEY);
     }
 
     /**
@@ -26,12 +56,11 @@ class Common
      */
     public static function setAuthUser($user)
     {
-        if (empty($user)) {
-            return false;
-        }
+        return self::setSession(SESS_AUTHORIZE_KEY, $user);
+    }
 
-        $_SESSION[AUTHORIZE_KEY] = serialize($user);
-
-        return self::isAuth();
+    public static function generateUrl($path)
+    {
+        return APP_URL.trim($path, '/');
     }
 }

@@ -3,13 +3,14 @@
 /**
  * 项目配置
  */
-define('APP_DEBUG', true);
+define('APP_DEBUG', true); // 开启错误显示
 define('ENABLE_SESSION', true); // 启用 session
-define('APP_URL', '');
-define('INDEX_URL', '');
-define('AUTHORIZE_URL', '');
-define('AUTHORIZE_CALLBACK', '');
-define('AUTHORIZE_KEY', ''); // session 存取用户信息的 key
+define('APP_URL', 'http://www.example.com/'); // 网站的根域名
+define('INDEX_URL', APP_URL.'index.php'); // index.php
+define('AUTHORIZE_URL', APP_URL.'authorize.php'); // authorize.php 授权页
+define('AUTHORIZE_CALLBACK', AUTHORIZE_URL.'?action=callback'); // 授权回调地址
+define('SESS_AUTHORIZE_KEY', 'SESS_AUTHORIZE_KEY'); // session 存取用户信息的 key
+define('SESS_TARGET_URL', 'SESS_TARGET_URL');
 
 /**
  * 微信配置

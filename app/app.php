@@ -3,8 +3,10 @@
 /**
  * 引入配置和 composer autoload 文件
  */
-require __DIR__.'/config.php';
 require __DIR__.'/../vendor/autoload.php';
+require __DIR__.'/config.php';
+require __DIR__.'/util.php';
+require __DIR__.'/common.php';
 
 /**
  * 定义 Application 类
