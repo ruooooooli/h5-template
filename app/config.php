@@ -9,6 +9,7 @@ define('APP_URL', '');
 define('INDEX_URL', '');
 define('AUTHORIZE_URL', '');
 define('AUTHORIZE_CALLBACK', '');
+define('AUTHORIZE_KEY', ''); // session 存取用户信息的 key
 
 /**
  * 微信配置

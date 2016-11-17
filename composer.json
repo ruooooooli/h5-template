@@ -1,6 +1,7 @@
 {
     "require": {
         "overtrue/wechat": "^3.1",
-        "illuminate/database": "^5.3"
+        "illuminate/database": "^5.3",
+        "symfony/http-foundation": "^3.1"
     }
 }

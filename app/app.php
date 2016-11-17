@@ -19,12 +19,17 @@ class Application
     /**
      * 数据库实例
      */
-    protected $database = null;
+    public $database = null;
 
     /**
      * 微信实例
      */
-    protected $wechat = null;
+    public $wechat = null;
+
+    /**
+     * http 请求的实例
+     */
+    public $request = null;
 
     /**
      * 构造函数私有化
@@ -57,6 +62,7 @@ class Application
     public function start()
     {
         $this->configEnvironment();
+        $this->createRequest();
 
         ENABLE_DATABASE && $this->createDatabase();
         ENABLE_WECHAT && $this->createWechat();
@@ -129,19 +135,35 @@ class Application
     }
 
     /**
-     * 返回数据库的实例
+     * 创建 request
      */
-    public function getDB()
+    public function createRequest()
     {
-        return $this->database;
+        $this->request = Symfony\Component\HttpFoundation\Request::createFromGlobals();
     }
 
     /**
-     * 返回微信的实例
+     * 获取 get 数据
      */
-    public function getWechat()
+    public function get($key, $default = null)
     {
-        return $this->wechat;
+        return $this->request->query->get($key, $default);
+    }
+
+    /**
+     * 获取 post 数据
+     */
+    public function post($key, $default = null)
+    {
+        return $this->request->request->get($key, $default);
+    }
+
+    /**
+     * 判断 ajax
+     */
+    public function isAjax()
+    {
+        return $this->request->isXmlHttpRequest();
     }
 }
 
