@@ -168,6 +168,17 @@ class Application
     {
         return $this->request->isXmlHttpRequest();
     }
+
+    /**
+     * 获取 jssdk 的配置
+     */
+    public function jssdk()
+    {
+        return $this->wechat->js->config(array(
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage'
+        ), APP_DEBUG);
+    }
 }
 
 /**
