@@ -7,7 +7,7 @@
 
     // 判断是否授权
     if (!Common::isAuth()) {
-        // 设置当前页面的地址
+        // 设置当前页面的地址 当授权完毕之后跳转的目标
         $currentUrl = Common::generateUrl($_SERVER['REQUEST_URI']);
         Common::setSession(SESS_TARGET_URL, $currentUrl);
 
@@ -18,8 +18,8 @@
     /**
      * 分享配置
      */
-    $user   = Common::getAuthUser();
-    $jssdk  = $app->jssdk();
+    $user   = Common::getAuthUser(); // 获取当前登录的用户
+    $jssdk  = $app->jssdk(); // 获取调用微信 jssdk 接口的配置
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +29,7 @@
         <title></title>
     </head>
     <body>
-
+        <!-- html 开始 -->
 
         <h1>Hello World !</h1>
 
